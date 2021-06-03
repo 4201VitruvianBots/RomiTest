@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -60,13 +61,21 @@ public class RomiRamseteCommandOld extends CommandBase {
         var poseChassisSpeeds = new ChassisSpeeds(desiredPose.velocityMetersPerSecond, 0, desiredPose.velocityMetersPerSecond * desiredPose.curvatureRadPerMeter);
         var adjustedChassisSpeeds = m_ramseteController.calculate(m_driveTrain.getPose(), desiredPose);
 
-//        var targetSpeeds = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(poseChassisSpeeds);
-//        var targetSpeedsRamsete = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(adjustedChassisSpeeds);
+        var targetSpeeds = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(poseChassisSpeeds);
+        var targetSpeedsRamsete = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(adjustedChassisSpeeds);
+
+        SmartDashboard.putNumber("Left Target Speed", targetSpeeds.leftMetersPerSecond);
+        SmartDashboard.putNumber("Left Ramsete", targetSpeedsRamsete.leftMetersPerSecond);
+        SmartDashboard.putNumber("Left Speed", m_driveTrain.getWheelSpeeds().leftMetersPerSecond);
+
+        SmartDashboard.putNumber("Right Target Speed", targetSpeeds.rightMetersPerSecond);
+        SmartDashboard.putNumber("Right Ramsete", targetSpeedsRamsete.rightMetersPerSecond);
+        SmartDashboard.putNumber("Right Speed", m_driveTrain.getWheelSpeeds().rightMetersPerSecond);
 
         m_driveTrain.drive(adjustedChassisSpeeds.vxMetersPerSecond, adjustedChassisSpeeds.omegaRadiansPerSecond);
-        m_robotPose.add(m_driveTrain.getPose());
+//        m_robotPose.add(m_driveTrain.getPose());
 
-        m_fieldSim.getField2d().getObject("ActualPath").setPoses(m_robotPose);
+//        m_fieldSim.getField2d().getObject("ActualPath").setPoses(m_robotPose);
     }
 
     @Override

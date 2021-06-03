@@ -5,8 +5,10 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.simulation.FieldSim;
@@ -60,9 +62,22 @@ public class RomiRamseteCommand extends RamseteCommand {
     public void execute() {
         super.execute();
 //        var robotPose = m_trajectory.sample(m_timer.get()).poseMeters;
-        m_robotPose.add(m_driveTrain.getPose());
+//        m_robotPose.add(m_driveTrain.getPose());
+//        var desiredPose = m_trajectory.sample(m_timer.get());
+//
+//        var refChassisSpeedsTarget = new ChassisSpeeds(desiredPose.velocityMetersPerSecond, 0.0, desiredPose.velocityMetersPerSecond * desiredPose.curvatureRadPerMeter);
+//        var refChassisSpeeds = this.ramseteController.calculate(m_driveTrain.getPose(), desiredPose);
+//
+//        var targetSpeeds = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(refChassisSpeedsTarget);
+//        var targetSpeedsRamsete = m_driveTrain.getDriveTrainKinematics().toWheelSpeeds(refChassisSpeeds);
+//
+//        SmartDashboard.putNumber("Left Target Speed", targetSpeeds.leftMetersPerSecond);
+//        SmartDashboard.putNumber("Left Ramsete", targetSpeedsRamsete.leftMetersPerSecond);
+//
+//        SmartDashboard.putNumber("Right Target Speed", targetSpeeds.rightMetersPerSecond);
+//        SmartDashboard.putNumber("Right Ramsete", targetSpeedsRamsete.rightMetersPerSecond);
 
-        m_fieldSim.getField2d().getObject("ActualPath").setPoses(m_robotPose);
+//        m_fieldSim.getField2d().getObject("ActualPath").setPoses(m_robotPose);
     }
 
 //    @Override
